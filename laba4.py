@@ -35,5 +35,15 @@ def for_R(arr_x, arr_z, N):
         r+=arr_x^arr_z
     return r
 
+def stvoruemo_kupu_L():
+    l=[]
+    l_1=[0]*30
+    k=30
+    l.append(l_1[:])
+    for i in range(1, 31):
+        l_1[k-i]=1
+        print(l_1)
+        l.append(l_1[:])
 
 alpha=0.01
+print(stvoruemo_kupu_L())
