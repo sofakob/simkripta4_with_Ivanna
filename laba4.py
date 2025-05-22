@@ -28,4 +28,12 @@ def generator_Giffi(x:list, y:list, s:list):
             z.append(y[i])
 
     return z
+
+def for_R(arr_x, arr_z, N):
+    r=0
+    for i in range(N):
+        r+=arr_x^arr_z
+    return r
+
+
 alpha=0.01
