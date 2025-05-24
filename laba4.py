@@ -31,7 +31,7 @@ def generator_Giffi(x:list, y:list, s:list):
 
 def for_R(arr_x:list, arr_z:list, N:int):
     r=0
-    for i in range(N):
+    for i in range(N-1):
         r+=arr_x[i]^arr_z[i]
     return r
 
@@ -49,52 +49,27 @@ def stvoruemo_kupu_L():
 with open ("input.txt", 'r') as file:
     bits=file.read()
 
-
-z_i=[0]*10
-for i in range(10):
-    z_i[i]=int(bits[i])
+k=257
+z_i=[0]*k
+z=[int(x) for x in bits]
 
 
 alpha=0.01
-nabor_l_1=stvoruemo_kupu_L()
-statistik_r=[0]*31
+l_1_bits=[0]*30
+l_1_bits[-1]=1
+l_1_bits=l_1(l_1_bits, k)
+statistik_r=[0]*k
 pihod_1=[]
-for i in range(31):
-    nabor_l_1[i]=l_1(nabor_l_1[i], 10)
-    statistik_r[i]=for_R(nabor_l_1[i], z_i, 10)
-    if statistik_r[i]<=5:
-        pihod_1.append(i)
+c=80
+print(len(l_1_bits))
+for i in range(k):
+    statistik_r[i]=for_R(l_1_bits, z, k)
+    if statistik_r[i]<c:
+        pihod_1.append(l_1_bits)
+    l_1_bits.pop(0)
+    l_1_bits=l_1(l_1_bits, k)
+
+
+print(pihod_1)
 print(statistik_r)
-nabor_l_2=stvoruemo_kupu_L()
-statistik_r=[0]*31
-pihod_2=[]
-for i in range(31):
-    nabor_l_2[i]=l_2(nabor_l_2[i], 10)
-    statistik_r[i]=for_R(nabor_l_2[i], z_i, 10)
-    if statistik_r[i]<=5:
-        pihod_2.append(i)
-print(statistik_r)
-
-nabor_l_3=stvoruemo_kupu_L()
-statistik_r=[0]*31
-pihod_3=[]
-for i in range(31):
-    nabor_l_3[i]=l_3(nabor_l_3[i], 10)
-
-for i in range(len(nabor_l_3)):
-   
-    for j in pihod_2:
-        for k in pihod_2:
-            z=generator_Giffi(nabor_l_1[j], nabor_l_2[k], nabor_l_3[i])
-            if z[0:10]==z_i:
-                pihod_3.append([i, j, k])
-
-print(pihod_3)
     
-
-
-
-
-print(pihod_1, pihod_2)
-
-
