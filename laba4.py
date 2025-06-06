@@ -19,6 +19,12 @@ def l_3(arr_s:list, dlinna:int):
         arr_s.append(s)
     return arr_s
 
+
+
+def potribniy_bit(a, index):
+    return(a>>index)&1
+
+
 def generator_Giffi(x:list, y:list, s:list):
     z=[]
     for i in range(len(s)):
@@ -29,11 +35,16 @@ def generator_Giffi(x:list, y:list, s:list):
 
     return z
 
-def for_R(arr_x:list, arr_z:list, N:int):
+def poluchit_30_bitiv(n):
+    mask=(1<<30)-1
+    return n&mask
+
+def for_R(arr_x:int, arr_z:int, N:int):
     r=0
+
     """Рахуємо статистику"""
     for i in range(N-1):
-        r+=arr_x[i]^arr_z[i]
+        r+=potribniy_bit(arr_x, i)^potribniy_bit(arr_z, i)
     return r
 
 """
@@ -72,34 +83,38 @@ N = 257
 C = 80
 first_arr = [0] * 29 + [1]
 arr = first_arr.copy()
+first_arr=''.join(str(x) for x in first_arr)
+first_arr=int(first_arr, 2)
 
 with open("input.txt", 'r') as file:
     bits = file.read()
 z_i = [int(bit) for bit in bits][:N]
-
+z_i=''.join(str(x) for x in z_i)
+z_i=int(z_i, 2)
 
 with open("res.txt", 'w') as res_file:
     i=0
     res = l_1(arr, N)
-    while True:
-        i+=1
+    res=''.join(str(x) for x in res)
+    res=int(res, 2)
+
+
+    while True and i<50:
         #print(len(arr), N)
-        
+        i+=1
         R = for_R(res, z_i, N)
         #print(type(R), type(C))
-
-        #print('регістр :', ''.join(map(str, arr)))
-        #print('послідовність:', ''.join(map(str, res)))
-        #print('R =', R)
+        print('R =', R)
+        print(res)
         if R <= C:
             res_file.write("".join(map(str, res)) + '\n')
             print(3)
 
-        res.append( res[0] ^ res[1] ^ res[4] ^ res[6])
-        res.pop(0)
-        print(i)
+        new_bit=potribniy_bit(res, 0) ^ potribniy_bit(res, 1)  ^ potribniy_bit(res, 4)  ^ potribniy_bit(res, 6) 
+        print(new_bit)
+        res=((res<<1)|new_bit)&((1<<N)-1)
         
 
-        if res[0:30] == first_arr and res[0:30]==[0]*30:
+        if poluchit_30_bitiv(res) == first_arr and poluchit_30_bitiv==0:
             break
     
