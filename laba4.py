@@ -109,12 +109,23 @@ with open("res.txt", 'w') as res_file:
         if R <= C:
             res_file.write(res)
             print(3)
-
-        new_bit=potribniy_bit(res, 0) ^ potribniy_bit(res, 1)  ^ potribniy_bit(res, 4)  ^ potribniy_bit(res, 6) 
-        print(new_bit)
+        
+        j=res.bit_length()
+        new_bit=potribniy_bit(res, 0+j) ^ potribniy_bit(res, j+1)  ^ potribniy_bit(res, 4+j)  ^ potribniy_bit(res, 6+j) 
+        print(new_bit, res)
         res=((res<<1)|new_bit)&((1<<N)-1)
         
 
-        if poluchit_30_bitiv(res) == first_arr and poluchit_30_bitiv==0:
+        if res == first_arr or res==0:
+            print(first_arr, res)
             break
-    
+first_arr = [0] * 29 + [1]
+arr = first_arr.copy()
+first_arr=''.join(str(x) for x in first_arr)
+first_arr=int(first_arr, 2)
+
+
+i=0
+res = l_1(arr, N)
+res=''.join(str(x) for x in res)
+res=int(res, 2)   
