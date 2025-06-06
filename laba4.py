@@ -79,20 +79,27 @@ z_i = [int(bit) for bit in bits][:N]
 
 
 with open("res.txt", 'w') as res_file:
-        
+    i=0
+    res = l_1(arr, N)
     while True:
-        res = l_1(arr.copy(), N)
+        i+=1
+        #print(len(arr), N)
+        
         R = for_R(res, z_i, N)
+        #print(type(R), type(C))
 
-        print('регістр :', ''.join(map(str, arr)))
-        print('послідовність:', ''.join(map(str, res)))
-        print('R =', R)
-        if R < C:
-            res_file.write("".join(map(str, arr)) + '\n')
+        #print('регістр :', ''.join(map(str, arr)))
+        #print('послідовність:', ''.join(map(str, res)))
+        #print('R =', R)
+        if R <= C:
+            res_file.write("".join(map(str, res)) + '\n')
+            print(3)
 
-        new_bit = arr[0] ^ arr[1] ^ arr[4] ^ arr[6]
-        arr = arr[1:] + [new_bit]
+        res.append( res[0] ^ res[1] ^ res[4] ^ res[6])
+        res.pop(0)
+        print(i)
+        
 
-        if arr == first_arr:
+        if res[0:30] == first_arr and res[0:30]==[0]*30:
             break
     
