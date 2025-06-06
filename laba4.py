@@ -36,18 +36,7 @@ def for_R(arr_x:list, arr_z:list, N:int):
         r+=arr_x[i]^arr_z[i]
     return r
 
-def stvoruemo_kupu_L():
-    l=[]
-    l_1=[0]*30
-    k=30
-    """Вже не потрібна функція бо пішли інакшим чином"""
-    l.append(l_1[:])
-    for i in range(1, 31):
-        l_1[k-i]=1
-        l.append(l_1[:])
-    return l
-
-
+"""
 with open ("input.txt", 'r') as file:
     bits=file.read()
 
@@ -76,4 +65,34 @@ for i in range(k):
 
 print(pihod_1) #перевіряємо те що нарахували
 print(statistik_r)
+"""
+
+
+N = 257
+C = 80
+first_arr = [0] * 29 + [1]
+arr = first_arr.copy()
+
+with open("input.txt", 'r') as file:
+    bits = file.read()
+z_i = [int(bit) for bit in bits][:N]
+
+
+with open("res.txt", 'w') as res_file:
+        
+    while True:
+        res = l_1(arr.copy(), N)
+        R = for_R(res, z_i, N)
+
+        print('регістр :', ''.join(map(str, arr)))
+        print('послідовність:', ''.join(map(str, res)))
+        print('R =', R)
+        if R < C:
+            res_file.write("".join(map(str, arr)) + '\n')
+
+        new_bit = arr[0] ^ arr[1] ^ arr[4] ^ arr[6]
+        arr = arr[1:] + [new_bit]
+
+        if arr == first_arr:
+            break
     
