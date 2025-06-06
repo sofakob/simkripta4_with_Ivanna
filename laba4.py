@@ -99,7 +99,7 @@ with open("res.txt", 'w') as res_file:
     res=int(res, 2)
 
 
-    while True and i<50:
+    while True:
         #print(len(arr), N)
         i+=1
         R = for_R(res, z_i, N)
@@ -107,7 +107,7 @@ with open("res.txt", 'w') as res_file:
         print('R =', R)
         print(res)
         if R <= C:
-            res_file.write("".join(map(str, res)) + '\n')
+            res_file.write(res)
             print(3)
 
         new_bit=potribniy_bit(res, 0) ^ potribniy_bit(res, 1)  ^ potribniy_bit(res, 4)  ^ potribniy_bit(res, 6) 
