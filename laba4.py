@@ -1,7 +1,7 @@
 def l_1(arr_x:list, dlinna:int):
     k=len(arr_x)
-    for i in range( dlinna-k):
-        x=arr_x[i]^arr_x[i+1]^arr_x[i+4]^arr_x[i+6]
+    for i in range( k, dlinna):
+        x=arr_x[i-30]^arr_x[i-29]^arr_x[i-26]^arr_x[i-24]
         arr_x.append(x)
     return arr_x
 
@@ -21,8 +21,8 @@ def l_3(arr_s:list, dlinna:int):
 
 
 
-def potribniy_bit(a, index):
-    return(a>>index)&1
+def potribniy_bit(a:int, index):
+    return(a>>a.bit_length()-index-1)&1
 
 
 def generator_Giffi(x:list, y:list, s:list):
@@ -97,32 +97,36 @@ with open("res.txt", 'w') as res_file:
     res = l_1(arr, N)
     res=''.join(str(x) for x in res)
     res=int(res, 2)
-
-
-    while True:
-        #print(len(arr), N)
+while res.bit_length()<N:
+            j=res.bit_length()
+            new_bit=potribniy_bit(res, j-29) ^ potribniy_bit(res, j-28)  ^ potribniy_bit(res, j-25)  ^ potribniy_bit(res, j-23) 
+            res=((res<<1)|new_bit)
+while True:
         i+=1
-        R = for_R(res, z_i, N)
+        R = for_R(res, z_i, N-1)
         #print(type(R), type(C))
         print('R =', R)
         print(bin(res), res.bit_length())
         if R <= C:
-            res_file.write(res)
+            res_file.write(str(res))
             print(3)
         
-        j=res.bit_length()-30
-        new_bit=potribniy_bit(res, 0+j) ^ potribniy_bit(res, j+1)  ^ potribniy_bit(res, 4+j)  ^ potribniy_bit(res, 6+j) 
+        j=res.bit_length()
+        new_bit=potribniy_bit(res, j-29) ^ potribniy_bit(res, j-28)  ^ potribniy_bit(res, j-25)  ^ potribniy_bit(res, j-23) 
         
         res=((res<<1)|new_bit)&((1<<N)-1)
-        print(new_bit, bin(res))
         while res.bit_length()<N:
-            new_bit=potribniy_bit(res, 0+j) ^ potribniy_bit(res, j+1)  ^ potribniy_bit(res, 4+j)  ^ potribniy_bit(res, 6+j) 
+            j=res.bit_length()
+            new_bit=potribniy_bit(res, j-29) ^ potribniy_bit(res, j-28)  ^ potribniy_bit(res, j-25)  ^ potribniy_bit(res, j-23) 
             res=((res<<1)|new_bit)
+            
 
 
         if res == first_arr or res==0:
-            print(first_arr, res)
+            print(first_arr, res, i)
             break
+
+    
 first_arr = [0] * 29 + [1]
 arr = first_arr.copy()
 first_arr=''.join(str(x) for x in first_arr)
