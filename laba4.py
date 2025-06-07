@@ -22,6 +22,8 @@ def l_3(arr_s:list, dlinna:int):
 
 
 def potribniy_bit(a:int, index):
+    if index>a.bit_length()-1:
+        index=index%a.bit_length()
     return(a>>a.bit_length()-index-1)&1
 
 
@@ -80,7 +82,7 @@ print(statistik_r)
 
 
 N = 257
-C = 80
+C = 85
 first_arr = [0] * 29 + [1]
 arr = first_arr.copy()
 first_arr=''.join(str(x) for x in first_arr)
@@ -106,6 +108,7 @@ while True:
         R = for_R(res, z_i, N-1)
         #print(type(R), type(C))
         print('R =', R)
+        print(i)
         print(bin(res), res.bit_length())
         if R <= C:
             res_file.write(str(res))
@@ -115,14 +118,11 @@ while True:
         new_bit=potribniy_bit(res, j-29) ^ potribniy_bit(res, j-28)  ^ potribniy_bit(res, j-25)  ^ potribniy_bit(res, j-23) 
         
         res=((res<<1)|new_bit)&((1<<N)-1)
-        while res.bit_length()<N:
-            j=res.bit_length()
-            new_bit=potribniy_bit(res, j-29) ^ potribniy_bit(res, j-28)  ^ potribniy_bit(res, j-25)  ^ potribniy_bit(res, j-23) 
-            res=((res<<1)|new_bit)
+       
             
 
 
-        if res == first_arr or res==0:
+        if res == first_arr or res==0 or i==2**257:
             print(first_arr, res, i)
             break
 
