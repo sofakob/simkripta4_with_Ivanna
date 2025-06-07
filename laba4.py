@@ -105,16 +105,20 @@ with open("res.txt", 'w') as res_file:
         R = for_R(res, z_i, N)
         #print(type(R), type(C))
         print('R =', R)
-        print(res)
+        print(bin(res), res.bit_length())
         if R <= C:
             res_file.write(res)
             print(3)
         
-        j=res.bit_length()
+        j=res.bit_length()-30
         new_bit=potribniy_bit(res, 0+j) ^ potribniy_bit(res, j+1)  ^ potribniy_bit(res, 4+j)  ^ potribniy_bit(res, 6+j) 
-        print(new_bit, res)
-        res=((res<<1)|new_bit)&((1<<N)-1)
         
+        res=((res<<1)|new_bit)&((1<<N)-1)
+        print(new_bit, bin(res))
+        while res.bit_length()<N:
+            new_bit=potribniy_bit(res, 0+j) ^ potribniy_bit(res, j+1)  ^ potribniy_bit(res, 4+j)  ^ potribniy_bit(res, 6+j) 
+            res=((res<<1)|new_bit)
+
 
         if res == first_arr or res==0:
             print(first_arr, res)
