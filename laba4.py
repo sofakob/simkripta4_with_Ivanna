@@ -27,10 +27,10 @@ def potribniy_bit(a:int, index):
     return(a>>a.bit_length()-index-1)&1
 
 
-def generator_Giffi(x:list, y:list, s:list):
+def generator_Giffi(x:list, y:list, s:list)->list:
     z=[]
     for i in range(len(s)):
-        if s[i]==0:
+        if s[i]==1:
             z.append(x[i])
         else:
             z.append(y[i])
@@ -78,7 +78,7 @@ for i in range(k):
 
 print(pihod_1) #перевіряємо те що нарахували
 print(statistik_r)
-"""
+
 
 
 N = 257
@@ -99,10 +99,6 @@ with open("res.txt", 'w') as res_file:
     res = l_1(arr, N)
     res=''.join(str(x) for x in res)
     res=int(res, 2)
-while res.bit_length()<N:
-            j=res.bit_length()
-            new_bit=potribniy_bit(res, j-29) ^ potribniy_bit(res, j-28)  ^ potribniy_bit(res, j-25)  ^ potribniy_bit(res, j-23) 
-            res=((res<<1)|new_bit)
 while True:
         i+=1
         R = for_R(res, z_i, N-1)
@@ -137,3 +133,4 @@ i=0
 res = l_1(arr, N)
 res=''.join(str(x) for x in res)
 res=int(res, 2)   
+"""
