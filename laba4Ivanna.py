@@ -40,8 +40,10 @@ with open("res2.txt", 'w') as res_file:
         if R < C:
             res_file.write("".join(map(str, arr)) + '\n')
 
+        j=len(arr)-26
+
        
-        new_bit = arr[0] ^ arr[1] ^ arr[2] ^ arr[6]
+        new_bit = arr[j+0] ^ arr[j+1] ^ arr[j+2] ^ arr[j+6]
         arr = arr[1:] + [new_bit]
 
         if arr == first_arr:
